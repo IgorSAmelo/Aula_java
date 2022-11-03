@@ -52,13 +52,15 @@ public class Conta {
         if (contaFav != null) {
             if (this.saldo + this.limite >= valor) {
                 this.saldo -= valor;
-                Transacao transEmitente = new Transacao(tipoTransacao.TRANSFERENCIA, new Date(), valor, contaFav.getCliente(),'+');
-                this.transacoes.add(transEmitente); //aqui a gente tá tirando o dinheiro da conta
+                Transacao transEmitente = new Transacao(tipoTransacao.TRANSFERENCIA, new Date(), valor,
+                        contaFav.getCliente(), '+');
+                this.transacoes.add(transEmitente); // aqui a gente tá tirando o dinheiro da conta
 
                 contaFav.saldo += valor;
 
-                Transacao transFav = new Transacao(tipoTransacao.TRANSFERENCIA, new Date(), valor, this.getCliente(), '+');
-               contaFav.transacoes.add(transFav); //aqui a gente tá colocando o dinheiro na outra conta. 
+                Transacao transFav = new Transacao(tipoTransacao.TRANSFERENCIA, new Date(), valor, this.getCliente(),
+                        '+');
+                contaFav.transacoes.add(transFav); // aqui a gente tá colocando o dinheiro na outra conta.
                 return true;
             } else {
                 return false;
@@ -89,6 +91,7 @@ public class Conta {
         return saldo;
     }
 
+
     public double getLimite() {
         return limite;
     }
@@ -106,17 +109,38 @@ public class Conta {
     }
 
     public String toString() {
-        return "Conta de " + this.cliente.getNome() + " de numero " + this.numero + " | " + this.cliente.toString() + " | ";
+        return "Conta de " + this.cliente.getNome() + " de numero " + this.numero + " | " + this.cliente.toString()
+                + " | ";
     }
 
     public String extrato() {
         String extrato = "";
         extrato += this.toString() + "\n";
-        for (Transacao trans: transacoes) {
+        for (Transacao trans : transacoes) {
             extrato += trans.toString() + "\n";
         }
         extrato += "Saldo: R$" + this.saldo + "|" + "Saldo Disponível R$" + (this.saldo + this.limite);
         return extrato;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public ArrayList<Transacao> getTransacoes() {
+        return transacoes;
+    }
+
+    public void setTransacoes(ArrayList<Transacao> transacoes) {
+        this.transacoes = transacoes;
     }
 
 }
