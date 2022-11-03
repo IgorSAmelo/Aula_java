@@ -1,6 +1,5 @@
 package Aula_java.Entidade;
 
-
 public class Endereco {
     private String uf;
     private String cidade;

@@ -1,5 +1,8 @@
 package Aula_java.Entidade;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Conta {
     private int numero;
     private Cliente cliente;
@@ -7,8 +10,10 @@ public class Conta {
     private double saldo;
     private double limite;
     private boolean status;
+    private ArrayList<Transacao> transacoes;
 
     public Conta() {
+        this.transacoes = new ArrayList<Transacao>();
     }
 
     public Conta(int numero, Cliente cliente, Agencia agencia, double saldo, double limite, boolean status) {
@@ -17,12 +22,15 @@ public class Conta {
         this.agencia = agencia;
         this.saldo = saldo;
         this.limite = limite;
-        this.status = status;
+        this.status = true;
+        this.transacoes = new ArrayList<Transacao>();
     }
 
     public boolean sacar(double valor) {
         if (this.saldo + this.limite >= valor) {
             this.saldo -= valor;
+            Transacao trans = new Transacao(tipoTransacao.DÉBITO, new Date(), valor, this.getCliente(), '-');
+            this.transacoes.add(trans);
             return true;
         } else {
             return false;
@@ -32,6 +40,8 @@ public class Conta {
     public boolean depositar(double valor) {
         if (valor > 0) {
             this.saldo += valor;
+            Transacao trans = new Transacao(tipoTransacao.DEPOSITO, new Date(), valor, this.getCliente(), '+');
+            this.transacoes.add(trans);
             return true;
         } else {
             return false;
@@ -42,7 +52,13 @@ public class Conta {
         if (contaFav != null) {
             if (this.saldo + this.limite >= valor) {
                 this.saldo -= valor;
+                Transacao transEmitente = new Transacao(tipoTransacao.TRANSFERENCIA, new Date(), valor, contaFav.getCliente(),'+');
+                this.transacoes.add(transEmitente); //aqui a gente tá tirando o dinheiro da conta
+
                 contaFav.saldo += valor;
+
+                Transacao transFav = new Transacao(tipoTransacao.TRANSFERENCIA, new Date(), valor, this.getCliente(), '+');
+               contaFav.transacoes.add(transFav); //aqui a gente tá colocando o dinheiro na outra conta. 
                 return true;
             } else {
                 return false;
@@ -90,9 +106,17 @@ public class Conta {
     }
 
     public String toString() {
-        return"Conta de " + this.cliente.getNome() + " de numero "+ this.numero + " | " + this.cliente.toString();
+        return "Conta de " + this.cliente.getNome() + " de numero " + this.numero + " | " + this.cliente.toString() + " | ";
     }
 
+    public String extrato() {
+        String extrato = "";
+        extrato += this.toString() + "\n";
+        for (Transacao trans: transacoes) {
+            extrato += trans.toString() + "\n";
+        }
+        extrato += "Saldo: R$" + this.saldo + "|" + "Saldo Disponível R$" + (this.saldo + this.limite);
+        return extrato;
+    }
 
 }
-

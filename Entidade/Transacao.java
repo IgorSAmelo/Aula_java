@@ -64,4 +64,10 @@ public class Transacao {
         this.tipoValor = tipoValor;
     }
 
+    public String toString(){
+        return this.data.toString() + " | " + this.tipo + " | " + this.tipoValor + "R$" +this.valor;
+    }
+
+
+
 }

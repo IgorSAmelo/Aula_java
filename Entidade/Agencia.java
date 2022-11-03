@@ -9,16 +9,12 @@ public class Agencia {
     public Agencia() {
     }
 
-    
-
     public Agencia(int numero, String telefone, String email, Endereco endereco) {
         this.numero = numero;
         this.telefone = telefone;
         this.email = email;
         this.endereco = endereco;
     }
-
-
 
     public int getNumero() {
         return numero;
