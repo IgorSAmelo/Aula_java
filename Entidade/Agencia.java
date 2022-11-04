@@ -9,11 +9,11 @@ public class Agencia {
     public Agencia() {
     }
 
-    public Agencia(int numero, String telefone, String email, Endereco endereco) {
+    public Agencia(int numero, String telefone, String email, Endereco end) {
         this.numero = numero;
         this.telefone = telefone;
         this.email = email;
-        this.endereco = endereco;
+        this.endereco = end;
     }
 
     public int getNumero() {

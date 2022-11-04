@@ -3,7 +3,7 @@ package Aula_java.Entidade;
 import java.util.Date;
 
 public class Cliente {
-    // atributos encapsulados
+    // Atributos encapsulados do Objeto
     private String nome;
     private String cpf;
     private String email;
@@ -11,11 +11,11 @@ public class Cliente {
     private Date dataNasc;
     private Endereco endereco;
 
-    // constructor vazio
+    // Método construtor vazio
     public Cliente() {
     }
 
-    // método constructor cheio ou full
+    // Método construtor cheio
     public Cliente(String nome, String cpf, String email, String telefone, Date dataNasc, Endereco end) {
         this.nome = nome;
         this.cpf = cpf;
@@ -24,12 +24,15 @@ public class Cliente {
         this.dataNasc = dataNasc;
         this.endereco = end;
     }
-    // método get para informar o valor do atributo
 
+    // Métodos Gets e Sets
+
+    // Método Get serve para informar o valor do atributo
     public String getNome() {
         return nome;
     }
 
+    // Método Set para modificar o valor do atributo
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -66,8 +69,8 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public String toString() {
-        return "Cliente: " +  this.nome + " | " + " CPF: " +  this.cpf;
+    public String toString(){
+        return "Cliente: " + this.nome + "| CPF: " + this.cpf;
     }
 
 }

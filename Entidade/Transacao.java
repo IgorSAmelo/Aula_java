@@ -2,12 +2,12 @@ package Aula_java.Entidade;
 
 import java.util.Date;
 
-enum tipoTransacao {
-    DÉBITO, DEPOSITO, TRANSFERENCIA;
+enum TipoTransacao {
+    DÉBITO, DEPÓSITO, TRANSFERÊNCIA;
 }
 
 public class Transacao {
-    private tipoTransacao tipo;
+    private TipoTransacao tipo;
     private Date data;
     private double valor;
     private Cliente clienteTrans;
@@ -16,7 +16,7 @@ public class Transacao {
     public Transacao() {
     }
 
-    public Transacao(tipoTransacao tipo, Date data, double valor, Cliente clienteTrans, char tipoValor) {
+    public Transacao(TipoTransacao tipo, Date data, double valor, Cliente clienteTrans, char tipoValor) {
         this.tipo = tipo;
         this.data = data;
         this.valor = valor;
@@ -24,11 +24,11 @@ public class Transacao {
         this.tipoValor = tipoValor;
     }
 
-    public tipoTransacao getTipo() {
+    public TipoTransacao getTipo() {
         return tipo;
     }
 
-    public void setTipo(tipoTransacao tipo) {
+    public void setTipo(TipoTransacao tipo) {
         this.tipo = tipo;
     }
 
@@ -63,11 +63,9 @@ public class Transacao {
     public void setTipoValor(char tipoValor) {
         this.tipoValor = tipoValor;
     }
-
+    @Override
     public String toString(){
-        return this.data.toString() + " | " + this.tipo + " | " + this.tipoValor + "R$" +this.valor;
+        return this.data.toString() + " | " + this.tipo + " | " + this.tipoValor + " R$ " + this.valor;
     }
-
-
 
 }
